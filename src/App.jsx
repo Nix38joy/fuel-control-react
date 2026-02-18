@@ -1,33 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import Pump from './components/Pump'; // 1. Импортируем нашу деталь
+import './App.css';
 
 function App() {
-  // Инициализируем состояние
   const [fuelStorage, setFuelStorage] = useState({
-    '92': 500,
-    '95': 500,
-    '98': 500,
-    'diesel': 500
+    '92': 500, '95': 500, '98': 500, 'diesel': 500
   });
 
+  // Универсальная функция заправки
+  const handleRefuel = (type, liters) => {
+    if (fuelStorage[type] >= liters) {
+      setFuelStorage({
+        ...fuelStorage,
+        [type]: fuelStorage[type] - liters
+      });
+    } else {
+      alert('Недостаточно топлива!');
+    }
+  };
+
   return (
-    <div style={{ backgroundColor: '#1a1a1a', color: '#ffffff', minHeight: '100vh', padding: '40px', fontFamily: 'sans-serif' }}>
-      <h1>⛽ Fuel Control: React Era</h1>
+    <div className="app-container" style={{ backgroundColor: '#1a1a1a', color: '#fff', minHeight: '100vh', padding: '20px' }}>
+      <h1>⛽ Fuel Control: Component Era</h1>
       
-      <div style={{ marginTop: '20px', border: '1px solid #444', padding: '20px', borderRadius: '8px' }}>
-        <h2 style={{ color: '#ffd700' }}>Остатки в резервуарах:</h2>
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {Object.entries(fuelStorage).map(([type, amount]) => (
-            <li key={type} style={{ fontSize: '24px', marginBlock: '15px', borderBottom: '1px solid #333', pb: '10px' }}>
-              {type}: <span style={{ color: '#00ff00' }}>{amount.toFixed(2)} л</span>
-            </li>
-          ))}
-        </ul>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginTop: '30px' }}>
+        {/* 2. Используем компонент Pump для каждого вида топлива */}
+        {Object.entries(fuelStorage).map(([type, amount]) => (
+          <Pump 
+            key={type} 
+            type={type} 
+            amount={amount} 
+            onRefuel={handleRefuel} 
+          />
+        ))}
       </div>
     </div>
   );
 }
 
 export default App;
+
 
 
 
