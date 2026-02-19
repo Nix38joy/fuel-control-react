@@ -338,3 +338,40 @@ button:disabled {
 }
 
 }
+
+.pump-card {
+  border: 1px dashed #555;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.pump-card--danger {
+  border-color: #ff4d4d;
+  background-color: rgba(255, 77, 77, 0.1);
+}
+
+.pump-card__title {
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+.pump-card__button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  cursor: pointer;
+  background-color: transparent;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* Стили кнопки при малом количестве топлива */
+.pump-card--danger .pump-card__button {
+  background-color: #ff4d4d;
+  color: #fff;
+  border-color: #ff4d4d;
+}
