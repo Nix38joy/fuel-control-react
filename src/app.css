@@ -12,15 +12,6 @@
     --color-dim: #aaa;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    display: flex;
-    justify-content: center;
-    padding: 40px 20px;
-    margin: 0;
-}
 
 .container {
     width: 100%;
@@ -374,4 +365,54 @@ button:disabled {
   background-color: #ff4d4d;
   color: #fff;
   border-color: #ff4d4d;
+}
+
+.app-container {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.app-title {
+  color: #ffd700;
+  font-size: 2.5rem;
+}
+
+.pumps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Мостик для React-структуры */
+.app-container {
+    width: 100%;
+    max-width: 1200px; /* Сделаем пошире для 4-х колонок */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.app-title {
+    text-align: center;
+    color: #ffffff;
+    font-weight: 300;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Обновляем сетку под наши новые карточки */
+.pumps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
 }
