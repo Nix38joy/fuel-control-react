@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import Pump from './components/Pump';
 import './App.css';
 
@@ -45,6 +45,20 @@ function App() {
   }
 };
 
+useEffect(() => {
+ 
+  if (orders.length === 0) return;
+
+  
+  const timer = setTimeout(() => {
+    processNextOrder(); 
+  }, 10000);
+
+    return () => clearTimeout(timer);
+
+
+}, [orders]); 
+
 
   return (
     <div className="app-container">
@@ -74,7 +88,7 @@ function App() {
     >
       ⚡ Заправить следующую
     </button>
-    
+
     <div className="orders-list">
             {orders.map(order => (
               <div key={order.id} className="order-item fade-in" style={{ padding: '10px', borderBottom: '1px solid #333' }}>
