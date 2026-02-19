@@ -20,6 +20,32 @@ function App() {
     setOrders([...orders, newOrder]);
   };
 
+  const processNextOrder = () => {
+ 
+  if (orders.length === 0) return;
+
+  
+  const nextOrder = orders[0];
+
+  if (fuelStorage[nextOrder.type] >= nextOrder.liters) {
+    
+    
+    setFuelStorage({
+      ...fuelStorage,
+      [nextOrder.type]: fuelStorage[nextOrder.type] - nextOrder.liters
+    });
+
+    
+    setOrders(orders.slice(1));
+
+  } else {
+    alert(`Нет топлива для заправки ${nextOrder.type}!`);
+    
+    setOrders(orders.slice(1)); 
+  }
+};
+
+
   return (
     <div className="app-container">
       <header className="app-header">
@@ -40,7 +66,16 @@ function App() {
 
         <section className="orders-section" style={{ marginTop: '40px' }}>
           <h2>Очередь заказов ({orders.length})</h2>
-          <div className="orders-list">
+          <button 
+      onClick={processNextOrder}
+      disabled={orders.length === 0}
+      className="pump-card__button"
+      style={{ width: 'auto', marginTop: 0, padding: '10px 20px' }}
+    >
+      ⚡ Заправить следующую
+    </button>
+    
+    <div className="orders-list">
             {orders.map(order => (
               <div key={order.id} className="order-item fade-in" style={{ padding: '10px', borderBottom: '1px solid #333' }}>
                 🚗 Машина: {order.type} — {order.liters}л [{order.status}]
